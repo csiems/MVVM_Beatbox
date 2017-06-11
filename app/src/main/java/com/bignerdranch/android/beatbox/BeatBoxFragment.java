@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 import com.bignerdranch.android.beatbox.databinding.FragmentBeatBoxBinding;
 import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding;
@@ -25,6 +26,7 @@ public class BeatBoxFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
         mBeatBox = new BeatBox(getActivity());
     }
@@ -32,13 +34,37 @@ public class BeatBoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentBeatBoxBinding binding = DataBindingUtil
+        final FragmentBeatBoxBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_beat_box, container, false);
 
+        binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mBeatBox.setSpeed(progress);
+                binding.seekBarTextview.setText("Playback Speed: " + String.valueOf((progress + 20)) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         binding.recyclerView.setAdapter(new SoundAdapter(mBeatBox.getSounds()));
         return binding.getRoot();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBeatBox.release();
+    }
+
 
     private class SoundHolder extends RecyclerView.ViewHolder {
         private ListItemSoundBinding mBinding;
@@ -54,8 +80,6 @@ public class BeatBoxFragment extends Fragment {
             mBinding.executePendingBindings();
         }
     }
-
-
 
     private class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
         private List<Sound> mSounds;

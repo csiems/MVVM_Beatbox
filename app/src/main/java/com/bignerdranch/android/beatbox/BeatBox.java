@@ -20,12 +20,18 @@ public class BeatBox {
     private AssetManager mAssets;
     private List<Sound> mSounds = new ArrayList<>();
     private SoundPool mSoundPool;
+    private float mSpeed;
 
     public BeatBox(Context context) {
         mAssets = context.getAssets();
         //This old constructor is deprecated, but needed for compatibility
         mSoundPool = new SoundPool(MAX_SOUNDS, AudioManager.STREAM_MUSIC, 0);
+        mSpeed = 1.0f;
         loadSounds();
+    }
+
+    public void setSpeed(float speed) {
+        mSpeed = (speed + 20) / 100;
     }
 
     public void play(Sound sound) {
@@ -38,7 +44,11 @@ public class BeatBox {
                         1.0f,      //vol right
                         1,         //priority
                         0,         //loop? yes or no
-                        1.0f);     //playback rate
+                        mSpeed);   //playback rate
+    }
+
+    public void release() {
+        mSoundPool.release();
     }
 
     private void loadSounds() {

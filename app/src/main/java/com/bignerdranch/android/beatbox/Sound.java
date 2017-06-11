@@ -12,7 +12,7 @@ public class Sound {
     public Sound(String assetPath) {
         mAssetPath = assetPath;
         String[] components = assetPath.split("/");
-        String filename = components[components.length - 1].substring(3);
+        String filename = components[components.length - 1].substring(3) + "!";
         mName = filename.replace(".wav", "");
     }
 

@@ -1,7 +1,9 @@
 package com.bignerdranch.android.beatbox;
 
 
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.bignerdranch.android.beatbox.databinding.FragmentBeatBoxBinding;
 import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding;
@@ -21,6 +24,11 @@ public class BeatBoxFragment extends Fragment {
 
     public static BeatBoxFragment newInstance() {
         return new BeatBoxFragment();
+    }
+
+    @BindingAdapter({"bind:font"})
+    public static void setFont(TextView textView, String fontName){
+        textView.setTypeface(Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/" + fontName));
     }
 
     @Override
@@ -40,11 +48,12 @@ public class BeatBoxFragment extends Fragment {
 
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         binding.recyclerView.setAdapter(new SoundAdapter(mBeatBox.getSounds()));
+
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mBeatBox.setSpeed(progress);
-                binding.seekBarTextview.setText("Playback Speed: " + String.valueOf((progress + 20)) + "%");
+                binding.seekBarTextview.setText(getString(R.string.playback_label) + String.valueOf((progress + 20)) + "%");
             }
 
             @Override
@@ -57,7 +66,6 @@ public class BeatBoxFragment extends Fragment {
 
             }
         });
-
         return binding.getRoot();
     }
 

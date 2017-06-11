@@ -14,7 +14,8 @@
     </style>
 
     <style name="BeatBoxButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/dark_blue</item>
+        <item name="android:background">@drawable/button_beat_box</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="BeatBoxSeekbar" parent="Widget.AppCompat.SeekBar">

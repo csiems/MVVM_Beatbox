@@ -1,5 +1,8 @@
 package com.bignerdranch.android.beatbox;
 
+/**
+ * Keeps track of information and methods related to the sound asset.
+ */
 public class Sound {
     private String mAssetPath;
     private String mName;

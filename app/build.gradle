@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.bignerdranch.android.beatbox"
         minSdkVersion 19
@@ -35,4 +36,8 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.8.9'
     testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

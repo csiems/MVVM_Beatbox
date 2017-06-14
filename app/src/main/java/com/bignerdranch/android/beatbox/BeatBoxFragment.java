@@ -1,9 +1,7 @@
 package com.bignerdranch.android.beatbox;
 
 
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.bignerdranch.android.beatbox.databinding.FragmentBeatBoxBinding;
 import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding;
@@ -26,10 +23,7 @@ public class BeatBoxFragment extends Fragment {
         return new BeatBoxFragment();
     }
 
-    @BindingAdapter({"bind:font"})
-    public static void setFont(TextView textView, String fontName){
-        textView.setTypeface(Typeface.createFromAsset(textView.getContext().getAssets(), "fonts/" + fontName));
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

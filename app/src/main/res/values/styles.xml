@@ -11,11 +11,18 @@
         <item name="buttonStyle">@style/BeatBoxButton</item>
         <item name="seekBarStyle">@style/BeatBoxSeekbar</item>
 
+
+
+    </style>
+
+    <style name="AppTheme.SplashTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="BeatBoxButton" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@drawable/button_beat_box</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="BeatBoxSeekbar" parent="Widget.AppCompat.SeekBar">
